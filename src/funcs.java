@@ -7,11 +7,10 @@ public void useroption(){
 
     Scanner actioninput = new Scanner(System.in);
     String action = actioninput.next();
-    if (action == "help") {
+    if (action.equals("help")) {
         displayoptions();
     }else{
-        print("Invalid option");
-        print("Type in 'help' for options");
+        calloption(action);
 
     }
 
@@ -25,6 +24,7 @@ public void calloption(String option){
     switch(option)
     {
         case "Quiz" :
+            print("Starting Quizz");
             //stuff
             break;
 
@@ -38,6 +38,7 @@ public void calloption(String option){
 
         default :
             print("Invalid option");
+            print("Type in 'help' for options");
 
 
     }
