@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Scanner;
 
 public class funcs {
@@ -8,11 +9,15 @@ public void useroption(){
     System.out.println("Type in 'help' for options");
 
     Scanner actioninput = new Scanner(System.in);
-    String action = actioninput.next();
-    if (action="help") {
+    String action = actioninput.nextLine();
+    if (action == "help") {
+        displayoptions();
+    }else{
+
+        
 
     }
-    calloption(action);
+
 
 
 
@@ -20,12 +25,26 @@ public void useroption(){
 
 public void calloption(String option){
 
-    switch(option) {
-    case "Quiz"
+    switch(option)
+    {
+        case "Quiz" :
+            //stuff
+            break;
+
+        case "Multiplayer Quiz" :
+
+            break;
+
+        case "Add concepts" :
+
+            break;
+
+        default :
+            print("Invalid option");
+
+
     }
 
-    if
-    (option =
 
 }
 
