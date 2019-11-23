@@ -5,16 +5,13 @@ public class funcs {
 
 public void useroption(){
 
-    System.out.println("What do you want to do?");
-    System.out.println("Type in 'help' for options");
-
     Scanner actioninput = new Scanner(System.in);
-    String action = actioninput.nextLine();
+    String action = actioninput.next();
     if (action == "help") {
         displayoptions();
     }else{
-
-        
+        print("Invalid option");
+        print("Type in 'help' for options");
 
     }
 
