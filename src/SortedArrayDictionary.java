@@ -27,6 +27,8 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
     public SortedArrayDictionary(){
         this(DEFAULT_CAPACITY);
     }
+
+    
     private class NoteCard<K, S, P, A> {
         private K key;
         private S subject;
