@@ -29,36 +29,36 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
     }
 
     
-    private class NoteCard<K, S, P, A> {
-        private K key;
-        private S subject;
-        private P prompt;
-        private A answer;
+    public class NoteCard<K, S, P, A> {
+        public K key;
+        public S subject;
+        public P prompt;
+        public A answer;
 
-        private NoteCard(K keyKey,S searchSubject, P prompting, A answering) {
+        public NoteCard(K keyKey,S searchSubject, P prompting, A answering) {
             key = keyKey;
             subject = searchSubject;
             prompt = prompting;
             answer = answering;
         }
-        private K getKey(){return key;}
-        private S getSubject() {
+        public K getKey(){return key;}
+        public S getSubject() {
             return subject;
         }
-        private P getPrompt() {
+        public P getPrompt() {
             return prompt;
         }
 
         /**
          *  may remove later, use undetermined
          */
-        private void setPrompt(P newPrompt) {
+        public void setPrompt(P newPrompt) {
             prompt = newPrompt;
         }
-        private A getAnswer(){
+        public A getAnswer(){
             return answer;
         }
-        private void setAnswer(A newAnswer){ answer = newAnswer; }
+        public void setAnswer(A newAnswer){ answer = newAnswer; }
     }
     private void checkIntegrity(){
         if (!integrityOK)
@@ -87,6 +87,7 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
     public A add(K key, S subject, P prompt, A answer) {
         checkIntegrity();
         A result = null;
+        System.out.println();
         //we don't allow blank cards or cards with duplicate keys
         if ((key == null) || (subject == null) || (prompt == null) || (answer == null) || (contains(key)))
             throw new IllegalArgumentException();
@@ -196,6 +197,37 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
             index++;
         }
         System.out.println();
+    }
+    //may need to be in dictionary class so generics are defined
+    public void makeQuiz(S subject,int numberOfQuestions){
+        QueueInterface<NoteCard> quiz = new LinkedQueue<>();
+        int numberOfQueueEntries = 0;
+        while((numberOfQueueEntries < numberOfQuestions) && (numberOfQuestions <= getNumberOfAvailableQuestions(subject)))
+        {
+            int index = dictionary.getRandomSubjectIndex(subject);
+            if(!quiz.hasEntry(dictionary[index]))
+            {
+                quiz.enqueue(dictionary[index]);
+                numberOfQueueEntries++;
+            }
+
+        }
+    }
+    private int getNumberOfAvailableQuestions(S subject)
+    {
+        int counter = 0;
+        int index = getEntryPoint(subject);
+        while(subject.equals(dictionary[index].getSubject()))
+        {
+            index++;
+            counter++;
+        }
+        return counter;
+    }
+    private void getRandomSubjectIndex(S subject)
+    {
+        int min = getEntryPoint(subject);
+        int max = getNumberOfAvailableQuestions(subject)-1;
     }
 }
 
