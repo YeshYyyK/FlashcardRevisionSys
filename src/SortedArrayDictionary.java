@@ -199,7 +199,7 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
         System.out.println();
     }
     //may need to be in dictionary class so generics are defined
-    public void makeQuiz(S subject,int numberOfQuestions){
+   /* public void makeQuiz(S subject,int numberOfQuestions){
         QueueInterface<NoteCard> quiz = new LinkedQueue<>();
         int numberOfQueueEntries = 0;
         while((numberOfQueueEntries < numberOfQuestions) && (numberOfQuestions <= getNumberOfAvailableQuestions(subject)))
@@ -213,6 +213,8 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
 
         }
     }
+
+    */
     private int getNumberOfAvailableQuestions(S subject)
     {
         int counter = 0;
