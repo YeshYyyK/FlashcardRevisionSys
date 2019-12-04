@@ -1,3 +1,4 @@
+import java.security.InvalidParameterException;
 import java.util.Arrays;
 /**
  * K is some unique user-entered identifier
@@ -12,7 +13,7 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
     private NoteCard<K, S,P,A>[] dictionary;
     private int numberOfEntries;
     private boolean integrityOK = false;
-    private final static int DEFAULT_CAPACITY = 50;
+    private final static int DEFAULT_CAPACITY = 100;
     private static final int MAX_CAPACITY = 10000;
 
     public SortedArrayDictionary(int initialCapacity){
@@ -29,23 +30,23 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
     }
 
     
-    public class NoteCard<K, S, P, A> {
-        public K key;
-        public S subject;
-        public P prompt;
-        public A answer;
+    private static class NoteCard<K, S, P, A> {
+        K key;
+        S subject;
+        P prompt;
+        A answer;
 
-        public NoteCard(K keyKey,S searchSubject, P prompting, A answering) {
+        private NoteCard(K keyKey, S searchSubject, P prompting, A answering) {
             key = keyKey;
             subject = searchSubject;
             prompt = prompting;
             answer = answering;
         }
-        public K getKey(){return key;}
-        public S getSubject() {
+        K getKey(){return key;}
+        S getSubject() {
             return subject;
         }
-        public P getPrompt() {
+        P getPrompt() {
             return prompt;
         }
 
@@ -59,6 +60,9 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
             return answer;
         }
         public void setAnswer(A newAnswer){ answer = newAnswer; }
+        public String toString(){
+            return key + " " + subject + " " + prompt + " " + answer;
+        }
     }
     private void checkIntegrity(){
         if (!integrityOK)
@@ -198,23 +202,25 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
         }
         System.out.println();
     }
-    //may need to be in dictionary class so generics are defined
-   /* public void makeQuiz(S subject,int numberOfQuestions){
-        QueueInterface<NoteCard> quiz = new LinkedQueue<>();
+    public LinkedQueue<NoteCard> makeQuiz(S subject, int numberOfQuestions){
+        LinkedQueue<NoteCard> quiz = new LinkedQueue<>();
         int numberOfQueueEntries = 0;
-        while((numberOfQueueEntries < numberOfQuestions) && (numberOfQuestions <= getNumberOfAvailableQuestions(subject)))
+        int availableQuestions = getNumberOfAvailableQuestions(subject);
+        if (numberOfQuestions > availableQuestions){
+            throw new InvalidParameterException("Number of questions has exceeded the maximum amount of: " + availableQuestions);
+        }
+        while((numberOfQueueEntries < numberOfQuestions))
         {
-            int index = dictionary.getRandomSubjectIndex(subject);
-            if(!quiz.hasEntry(dictionary[index]))
+            int index = getRandomSubjectIndex(subject);
+            if(quiz.isEmpty() || !quiz.hasEntry(dictionary[index]))
             {
                 quiz.enqueue(dictionary[index]);
                 numberOfQueueEntries++;
             }
-
         }
+        return quiz;
     }
 
-    */
     private int getNumberOfAvailableQuestions(S subject)
     {
         int counter = 0;
@@ -226,10 +232,15 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
         }
         return counter;
     }
-    private void getRandomSubjectIndex(S subject)
+    private int getRandomSubjectIndex(S subject)
     {
+        //first index of desired range
         int min = getEntryPoint(subject);
-        int max = getNumberOfAvailableQuestions(subject)-1;
+        //last index of desired range
+        int max = min + getNumberOfAvailableQuestions(subject)-1;
+        int rand = min + (int)(Math.random() * ((max - min) + 1));
+        //random index within subject range
+        return rand;
     }
 }
 

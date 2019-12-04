@@ -45,6 +45,7 @@ public interface DictionaryInterface<K,S,P,A> {
      */
     public void clear();
     public void subjectIterator();
+    public LinkedQueue makeQuiz(S subject, int numberOfQuestions);
 
     public int locateIndex(K key);
 }
