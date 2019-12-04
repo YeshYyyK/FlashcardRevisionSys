@@ -67,7 +67,6 @@ public final class LinkedQueue<T> implements QueueInterface<T>{
     }
 
     public boolean hasEntry(T someEntry) {
-        boolean result = false;
         Node currentNode = firstNode;
         while(currentNode != null)
         {
@@ -78,6 +77,6 @@ public final class LinkedQueue<T> implements QueueInterface<T>{
             else
                 currentNode = currentNode.getNextNode();
         }
-        return result;
+        return false;
     }
 }

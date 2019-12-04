@@ -29,25 +29,28 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
         this(DEFAULT_CAPACITY);
     }
 
-    
-    private static class NoteCard<K, S, P, A> {
+
+    public static class NoteCard<K, S, P, A> {
         K key;
         S subject;
         P prompt;
         A answer;
 
-        private NoteCard(K keyKey, S searchSubject, P prompting, A answering) {
+        public NoteCard(K keyKey, S searchSubject, P prompting, A answering) {
             key = keyKey;
             subject = searchSubject;
             prompt = prompting;
             answer = answering;
         }
-        K getKey(){return key;}
-        S getSubject() {
+        public K getKey(){return key;}
+        public S getSubject() {
             return subject;
         }
-        P getPrompt() {
+        public P getPrompt() {
             return prompt;
+        }
+        public A getAnswer(){
+            return answer;
         }
 
         /**
@@ -55,9 +58,6 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
          */
         public void setPrompt(P newPrompt) {
             prompt = newPrompt;
-        }
-        public A getAnswer(){
-            return answer;
         }
         public void setAnswer(A newAnswer){ answer = newAnswer; }
         public String toString(){
@@ -115,7 +115,7 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
     }
     //locates where to place the notecard into the dictionary
     //compares the subject parameter against the subjects in the dictionary
-    private int getEntryPoint(S subject)
+    public int getEntryPoint(S subject)
     {
         int index = 0;
         while ((index < numberOfEntries) && subject.compareTo(dictionary[index].getSubject()) > 0)
