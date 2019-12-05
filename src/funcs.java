@@ -4,7 +4,7 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class funcs {
-   
+
 
 
     public void CreateCollection{
@@ -98,9 +98,23 @@ public void displayoptions(){
 }
 
 
-public void displayquiz(){
+public void displayquiz(LinkedQueue<NoteCard> input){
 
         //takes the output of makequiz - queue
+    int correctanswers = 0;
+    int totalquestions = 0;
+    NoteCard<Integer, String, String, String> placeholder= new NoteCard<>(null,null,null,null);
+    String rightanswer;
+
+        while (!input.isEmpty()){
+
+           placeholder = input.dequeue();
+           rightanswer = placeholder.getAnswer();
+           Math.random();
+
+
+    }
+
         // loops the number of notecards in the queue
         // counters for correct answers and total questions
         // retrieve right answer from current notecard - using getfront or otherwise
