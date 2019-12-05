@@ -49,4 +49,6 @@ public interface DictionaryInterface<K,S,P,A> {
 
     public int locateIndex(K key);
     public int getEntryPoint(S subject);
+    public int getRandomSubjectIndex(S subject);
+    public A getAnswer(K key);
 }

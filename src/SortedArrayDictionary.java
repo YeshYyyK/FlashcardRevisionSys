@@ -10,7 +10,7 @@ import java.util.Arrays;
  * duplicate subjects, prompts, and answers are allowed
  */
 public class SortedArrayDictionary<K extends Comparable<? super K> , S extends Comparable<? super S>, P, A > implements DictionaryInterface<K, S, P, A> {
-    private NoteCard<K, S,P,A>[] dictionary;
+    private NoteCard<K, S, P, A>[] dictionary;
     private int numberOfEntries;
     private boolean integrityOK = false;
     private final static int DEFAULT_CAPACITY = 100;
@@ -19,7 +19,7 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
     public SortedArrayDictionary(int initialCapacity){
         checkCapacity(initialCapacity);
         @SuppressWarnings("unchecked")
-        NoteCard<K,S,P,A>[] tempDictionary = (NoteCard<K, S,P,A>[]) new NoteCard[initialCapacity];
+        NoteCard[] tempDictionary = (NoteCard[]) new NoteCard[initialCapacity];
         dictionary = tempDictionary;
         numberOfEntries = 0;
         integrityOK = true;
@@ -29,41 +29,6 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
         this(DEFAULT_CAPACITY);
     }
 
-
-    public static class NoteCard<K, S, P, A> {
-        K key;
-        S subject;
-        P prompt;
-        A answer;
-
-        public NoteCard(K keyKey, S searchSubject, P prompting, A answering) {
-            key = keyKey;
-            subject = searchSubject;
-            prompt = prompting;
-            answer = answering;
-        }
-        public K getKey(){return key;}
-        public S getSubject() {
-            return subject;
-        }
-        public P getPrompt() {
-            return prompt;
-        }
-        public A getAnswer(){
-            return answer;
-        }
-
-        /**
-         *  may remove later, use undetermined
-         */
-        public void setPrompt(P newPrompt) {
-            prompt = newPrompt;
-        }
-        public void setAnswer(A newAnswer){ answer = newAnswer; }
-        public String toString(){
-            return key + " " + subject + " " + prompt + " " + answer;
-        }
-    }
     private void checkIntegrity(){
         if (!integrityOK)
             throw new SecurityException("ArrayBag object is corrupt.");
@@ -77,7 +42,7 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
     private void ensureCapacity(){
         //if dictionary is full or over capacity
         if (numberOfEntries >= dictionary.length){
-            //double length of array
+            //double length of arrayDictionaryInterface
             int newLength = 2 * dictionary.length;
             //ensure that new length is not too large
             checkCapacity(newLength);
@@ -160,6 +125,11 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
             return dictionary[locateIndex(key)].getPrompt();
         else return null;
     }
+    public A getAnswer(K key){
+        if (contains(key))
+            return dictionary[locateIndex(key)].getAnswer();
+        else return null;
+    }
 
     public boolean contains(K key) {
         if(dictionary[locateIndex(key)] != null && key.equals(dictionary[locateIndex(key)].getKey()))
@@ -232,7 +202,7 @@ public class SortedArrayDictionary<K extends Comparable<? super K> , S extends C
         }
         return counter;
     }
-    private int getRandomSubjectIndex(S subject)
+    public int getRandomSubjectIndex(S subject)
     {
         //first index of desired range
         int min = getEntryPoint(subject);
