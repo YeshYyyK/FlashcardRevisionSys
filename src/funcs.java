@@ -4,23 +4,13 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class funcs {
-    //composes a static dictionary of static elements
-    private DictionaryInterface<Integer, String, String, String> dictionary = new SortedArrayDictionary<>(100);
-    public DictionaryInterface<Integer, String, String, String> makeDictionary(){
-        dictionary.add(1,"Spanish", "How do you say hello in spanish?", "Hola");
-        dictionary.add(2,"Math", "What is an example of a variable?", "x");
-        dictionary.add(3,"Math", "What is an example of a constant?", "pi");
-        dictionary.add(4,"Math", "What is the perimeter of a square?", "4s");
-        dictionary.add(5,"CS", "What is an example of a string?", "This is a string");
-        return dictionary;
-    }
-    NoteCard tempCard = new NoteCard(null, null, null, null);
-    LinkedQueue testQueue = dictionary.makeQuiz("Math", 3);
+   
 
 
     public void CreateCollection{
 
         DictionaryInterface<Integer, String, String, String> collection = new SortedArrayDictionary<>();
+        collection.add(1,"Math", "What is the x axis","horizontal line");
         collection.add(2,"Math","What is an example of a variable?","x");
         collection.add(3, "Math","What is an example of a constant?","pi");
         collection.add(4, "Math","What is the perimeter of a square?","4 x sides");
@@ -49,6 +39,10 @@ public class funcs {
         collection.add(27,"English","What is a metaphor?","Applying a word for comparison");
         collection.add(28,"English","What is a hyperbole?","Exaggerations");
         collection.add(29,"English","What is an aliteration?","Phrases' words that start with the same sound");
+
+
+        public int totalCollection = 29;
+
 
     }
 
@@ -100,13 +94,42 @@ public void displayoptions(){
     print("Quiz"); //uses queue
     print("Multiplayer Quiz"); //uses stack
     print("Add concepts"); //lets user add objects into dictionary
-    print("TrueFalse Quiz"); //uses queue?
     // print("Review Quiz"); //lets the user go back
 }
 
 
-public <Q> void displayquiz(Q Queue){
+public void displayquiz(){
 
+        //takes the output of makequiz - queue
+        // loops the number of notecards in the queue
+        // counters for correct answers and total questions
+        // retrieve right answer from current notecard - using getfront or otherwise
+        // use math.random to place it in 1-4 (of an array?)
+        // use getwronganswers to fill in the other slots
+        // displays prompt from notecard
+        // displays answers from array
+        // let user input a letter/number of the answer - using scanner
+        // comparison to see if it is the right answer
+        // increment correct answers and total questions accordingly
+        // repeat loop
+
+        // correct / total = score/whatever
+
+
+
+}
+
+
+public void multiplayerquiz(){
+
+
+}
+
+
+public void addconcepts(){
+        //scanner that asks 3 times for subject, prompt, answer
+        // key = totalCollection + 1
+        // totalcollection++
 
 }
 
