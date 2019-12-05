@@ -48,4 +48,5 @@ public interface DictionaryInterface<K,S,P,A> {
     public LinkedQueue makeQuiz(S subject, int numberOfQuestions);
 
     public int locateIndex(K key);
+    public int getEntryPoint(S subject);
 }
