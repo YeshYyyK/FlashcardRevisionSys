@@ -7,13 +7,19 @@ public class Test {
         dictionary.add(3,"Math", "What is an example of a constant?", "pi");
         dictionary.add(4,"Math", "What is the perimeter of a square?", "4s");
         dictionary.add(5,"CS", "What is an example of a string?", "This is a string");
+
         //testing for random logic needed in quiz generation
        /* int Min = 1;
         int Max = 3;
         int rand = Min + (int)(Math.random() * ((Max - Min) + 1));
         System.out.println(rand);
         */
+        NoteCard tempCard = new NoteCard(null, null, null, null);
         LinkedQueue testQueue = dictionary.makeQuiz("Math", 3);
+        tempCard = (NoteCard) testQueue.dequeue();
+        System.out.println(tempCard.getKey());
+        System.out.println(tempCard.getAnswer());
+        System.out.println(tempCard.getPrompt());
         while(!testQueue.isEmpty()){
             System.out.println(testQueue.dequeue().toString());
         }

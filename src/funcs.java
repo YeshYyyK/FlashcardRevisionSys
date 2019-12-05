@@ -1,11 +1,12 @@
 import javax.swing.*;
 import java.security.InvalidParameterException;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class funcs {
     //composes a static dictionary of static elements
+    private DictionaryInterface<Integer, String, String, String> dictionary = new SortedArrayDictionary<>(100);
     public DictionaryInterface<Integer, String, String, String> makeDictionary(){
-        DictionaryInterface<Integer, String, String, String> dictionary = new SortedArrayDictionary<>();
         dictionary.add(1,"Spanish", "How do you say hello in spanish?", "Hola");
         dictionary.add(2,"Math", "What is an example of a variable?", "x");
         dictionary.add(3,"Math", "What is an example of a constant?", "pi");
@@ -13,6 +14,8 @@ public class funcs {
         dictionary.add(5,"CS", "What is an example of a string?", "This is a string");
         return dictionary;
     }
+    NoteCard tempCard = new NoteCard(null, null, null, null);
+    LinkedQueue testQueue = dictionary.makeQuiz("Math", 3);
 
 
     public void CreateCollection{
@@ -112,47 +115,17 @@ public void print(String printstring){
     System.out.println(printstring);
 }
 
-    public LinkedQueue<SortedArrayDictionary.NoteCard> makeQuiz(String subject, int numberOfQuestions){
-        LinkedQueue<SortedArrayDictionary.NoteCard> quiz = new LinkedQueue<>();
-        int numberOfQueueEntries = 0;
-        int availableQuestions = getNumberOfAvailableQuestions(subject);
-        if (numberOfQuestions > availableQuestions){
-            throw new InvalidParameterException("Number of questions has exceeded the maximum amount of: " + availableQuestions);
-        }
-        while((numberOfQueueEntries < numberOfQuestions))
-        {
-            int index = getRandomSubjectIndex(subject);
-            if(quiz.isEmpty() || !quiz.hasEntry(dictionary[index]))
-            {
-                quiz.enqueue(dictionary[index]);
-                numberOfQueueEntries++;
-            }
-        }
-        return quiz;
-    }
+//makes and displays the quiz
+//takes in a linked queue with all notecards needed for the quiz
+public void displayQuiz(LinkedQueue<NoteCard> quiz){
 
-    private int getNumberOfAvailableQuestions(String subject)
-    {
-        SortedArrayDictionary dictionary = new SortedArrayDictionary<>(100);
-        int counter = 0;
-        int index = makeDictionary().getEntryPoint(subject);
-        while(subject.equals(dictionary[index].getSubject()))
-        {
-            index++;
-            counter++;
-        }
-        return counter;
-    }
-    private int getRandomSubjectIndex(S subject)
-    {
-        //first index of desired range
-        int min = getEntryPoint(subject);
-        //last index of desired range
-        int max = min + getNumberOfAvailableQuestions(subject)-1;
-        int rand = min + (int)(Math.random() * ((max - min) + 1));
-        //random index within subject range
-        return rand;
-    }
+}
+public LinkedQueue getWrongAnswers(String correctAnswer, String subject){
+    //grabs the subject from the single subject queue so we can search through relevant dictionary entries
+    String subject = (String) quiz.getFront().getSubject();
+}
+
+
 
 
 }
