@@ -1,6 +1,12 @@
 public class Test {
     public static void main(String[] args) {
         QueueInterface<String> test = new LinkedQueue<>();
+
+        int randomindex = (int)Math.random()*3;
+
+        System.out.println(randomindex);
+
+
         DictionaryInterface<Integer, String, String, String> dictionary = new SortedArrayDictionary<>();
         dictionary.add(1,"Spanish", "How do you say hello in spanish?", "Hola");
         dictionary.add(2,"Math", "What is an example of a variable?", "x");

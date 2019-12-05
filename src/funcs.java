@@ -3,11 +3,15 @@ import java.security.InvalidParameterException;
 import java.util.Queue;
 import java.util.Scanner;
 
+
+
+import java.util.Scanner;
+
 public class funcs {
 
+funcs Test = new funcs();
 
-
-    public void CreateCollection{
+    public DictionaryInterface<Integer, String, String, String> CreateCollection(){
 
         DictionaryInterface<Integer, String, String, String> collection = new SortedArrayDictionary<>();
         collection.add(1,"Math", "What is the x axis","horizontal line");
@@ -41,11 +45,13 @@ public class funcs {
         collection.add(29,"English","What is an aliteration?","Phrases' words that start with the same sound");
 
 
-        public int totalCollection = 29;
+        return collection;
 
 
     }
 
+
+    public int totalCollection = 29;
 
 public void useroption(){
 
@@ -110,7 +116,21 @@ public void displayquiz(LinkedQueue<NoteCard> input){
 
            placeholder = input.dequeue();
            rightanswer = placeholder.getAnswer();
-           Math.random();
+            int randomindex = ((int)Math.random()*3)+1;
+
+           String answers[] = new String[4];
+           answers[randomindex] = rightanswer;
+
+           int i =0;
+            while (i<4){
+                if (i != randomindex){
+                    answers[i] =
+                }
+                i++;
+            }
+
+
+
 
 
     }
@@ -141,6 +161,7 @@ public void multiplayerquiz(){
 
 
 public void addconcepts(){
+
         //scanner that asks 3 times for subject, prompt, answer
         // key = totalCollection + 1
         // totalcollection++
@@ -154,13 +175,28 @@ public void print(String printstring){
 
 //makes and displays the quiz
 //takes in a linked queue with all notecards needed for the quiz
-public void displayQuiz(LinkedQueue<NoteCard> quiz){
 
-}
-public LinkedQueue getWrongAnswers(String correctAnswer, String subject){
-    //grabs the subject from the single subject queue so we can search through relevant dictionary entries
-    String subject = (String) quiz.getFront().getSubject();
-}
+
+    public LinkedQueue getWrongAnswers(String correctAnswer, String subject){
+        DictionaryInterface collectionholder = new Dis
+        Test.CreateCollection();
+
+        //grabs the subject from the single subject queue so we can search through relevant dictionary entries
+        int i = 0;
+        LinkedQueue<String> wrongAnswers = new LinkedQueue<>();
+        while(i<3){
+            int index = collection.getRandomSubjectIndex(subject);
+            if(wrongAnswers.isEmpty()){
+                wrongAnswers.enqueue(dictionary.getAnswer(index));
+                i++;
+            }
+            //the answer pulled is not correct and does not already exist in the queue
+            else if(dictionary.getAnswer(index) != correctAnswer && !wrongAnswers.hasEntry(dictionary.getAnswer(index))) {
+                wrongAnswers.enqueue(dictionary.getAnswer(index));
+            }
+        }
+        return wrongAnswers;
+    }
 
 
 
